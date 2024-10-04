@@ -1,0 +1,75 @@
+body {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center;
+  align-items: left;
+  height: 100vh;
+  margin: 0;
+  background-color: #f7f7f7b0;
+  font-family: "Helvetica", "Arial", "Roboto";
+  font-size: 16px;
+}
+
+.container {
+  width: 60%; /* Make the container take up the full width */
+  margin: auto;
+}
+
+#map {
+  height: 70vh; /* Adjusted to be responsive */
+  width: 100%;
+  margin: 0 auto; /* Center the map */
+}
+
+h1 {
+  font-family: Miller;
+  margin-top: 20px;
+  font-size: 60px;
+  font-weight: bolder;
+  text-align: left;
+}
+
+p {
+  font-size: 20px;
+}
+
+h2 {
+  font-family: Miller;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 30px;
+  font-weight: bolder;
+  text-align: left;
+}
+
+#byline {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  text-align: left;
+  color: rgb(164, 162, 162);
+  font-weight: 100;
+}
+
+.note {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  text-align: left;
+  color: rgb(164, 162, 162);
+  font-weight: 100;
+}
+
+/* Customize tooltip font size and ensure text wrapping works properly */
+.leaflet-tooltip {
+  font-size: 15px;
+  font-weight: 300;
+  padding: 15px;
+  background-color: white;
+  width: 400px;
+  max-width: 1000px;
+  height: auto;
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: left;
+}
