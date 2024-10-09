@@ -9,28 +9,118 @@
   </head>
   <body class="container">
     <h1>San Francisco Traffic Deaths Remain High 10 Years After "Vison Zero"</h1>
-    <div id="byline">By Edison Wu | Oct.3, 2024</div>
-    <p>
-      In 2014, San Francisco committed to "Vision Zero," a bold initiative aimed at eliminating
-      traffic deaths within a decade. City officials promised to invest millions of dollars to
-      reduce speeds and redesign intersections to prioritize pedestrian safety.
-    </p>
-    <p>
-      However, a decade later, the results fall short. Data shows that more than twenty-five people
-      lost their lives in traffic crashes in San Francisco in 2024, nearly matching the number of
-      deaths recorded in 2014.
-    </p>
-
-    <h2>San Francisco's traffic fatalities in 2024</h2>
-    <div class="note">Note: Data is as of Dec. 14</div>
-    <div id="map"></div>
-    <div class="note">
-      <p>Map: Edison Wu • Source: San Francisco Municipal Transportation Agency</p>
+    <div id="byline">
+      By
+      <a
+        href="https://edisonyzwu.github.io/"
+        target="_blank"
+        style="color: #939292; text-decoration: underline"
+      >
+        Edison Wu
+      </a>
+      | Oct.3, 2024
     </div>
 
-    <p>TBC</p>
+    <div class="image-section">
+      <img src="images/sf.jpg" alt="San Francisco Traffic" style="width: 100%; height: auto" />
+      <p class="caption">
+        Cable cars make their way down a busy street in San Francisco’s financial district, with the
+        Bay Bridge faintly visible in the background. Ten years after San Francisco introduced its
+        Vision Zero initiative, the city continues to has dozens of traffic-related fatalities
+        occurring annually. (Edison Wu)
+      </p>
+    </div>
+    <p>
+      In 2014, San Francisco set an ambitious goal: eliminate all traffic-related deaths by 2024
+      under the Vision Zero initiative. The city committed millions to improving road safety by
+      redesigning dangerous intersections, lowering speed limits, and prioritizing pedestrian and
+      cyclist safety. But a decade later, the city is far from reaching that goal. Traffic
+      fatalities have remained persistently high, putting the plan’s effectiveness under scrutiny.
+    </p>
+    <h3>A Grim Reality</h3>
+    <p>
+      San Francisco recorded over 45 traffic-related deaths in 2023, surpassing the number of
+      fatalities in 2014 when the program was launched. Early success saw fatalities drop to 20 in
+      2017, but the recent rise has residents questioning whether the current approach is enough to
+      meet the original target.
+    </p>
+    <h2>San Francisco's traffic fatalities in 2024</h2>
+    <div id="map"></div>
+    <div class="note">
+      <p>*Data for 2024 is through Dec. 14</p>
+      <p>
+        Map: Edison Wu • Source: San Francisco Municipal Transportation Agency • Created by Leaflet
+      </p>
+    </div>
+    <p>
+      The map of fatal crashes reveals that these incidents are spread across the city, with several
+      occurring near roads flagged as part of the "high-injury network," where the majority of
+      severe traffic crashes happen. For those living in these areas, navigating daily commutes
+      feels perilous, with dangerous intersections and speeding vehicles a constant threat.
+    </p>
+    <h3>Pedestrians Are the Main Victims</h3>
 
+    <p>
+      The data shows pedestrians continue to be disproportionately affected, accounting for nearly
+      half of all traffic deaths. High-speed crashes involving motorcyclists and drivers also
+      contribute significantly to the rising fatality count.
+    </p>
+    <h2>San Francisco's Traffic Fatalities by Victim Type</h2>
+    <div id="chart"></div>
+    <div class="note">
+      <p>*Data for 2024 is through September 30.</p>
+      <p>
+        Chart: Edison Wu • Source: San Francisco Municipal Transportation Agency • Created by D3.js
+      </p>
+    </div>
+    <p>
+      With the 2024 Vision Zero deadline fast approaching, it’s evident that much more needs to be
+      done. Dangerous driving behaviors, particularly speeding, have worsened during and after the
+      COVID-19 pandemic. In response, Mayor London Breed announced new measures in 2023 to improve
+      road safety, such as expanding the ban on right turns at red lights, increasing police
+      presence at high-risk intersections, and installing more speed cameras.
+    </p>
+    <p>
+      However, enforcement has been a significant challenge. Traffic citations in San Francisco have
+      plummeted in recent years. In 2014, officers issued more than 10,000 citations per month, but
+      by 2023, that number had dropped to fewer than 350 citations monthly—a 96% decrease. This
+      sharp decline in enforcement, which began even before the pandemic, raises concerns about the
+      city’s ability to ensure safer streets.
+    </p>
+    <h3>The Road Ahead</h3>
+    <p class="last-p">
+      As San Francisco moves into the next phase of Vision Zero, the central question remains: Will
+      these new measures be enough to reverse the trend and make the city’s streets safer? The
+      reality is, the path forward is far more complex than city officials may have anticipated a
+      decade ago.
+    </p>
+    <div class="methodology-section">
+      <h4>Methodology</h4>
+      <p class="methodology">
+        This report is based on data from the
+        <a
+          href="https://www.sfmta.com/"
+          target="_blank"
+          style="color: #f0f0f0; text-decoration: underline"
+        >
+          San Francisco Municipal Transportation Agency
+        </a>
+        and includes analysis of traffic fatalities from 2014 through 2024. The interactive map
+        visualizes locations of fatal traffic crashes, while the stacked bar chart breaks down
+        fatalities by victim type (pedestrian, cyclist, motorcyclist, and driver). You can find the
+        codes and data on my
+        <a
+          href="https://github.com/edisonyzwu/Traffic-SF"
+          target="_blank"
+          style="color: #f0f0f0; text-decoration: underline"
+        >
+          GitHub page
+        </a>
+        .
+      </p>
+    </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

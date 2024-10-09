@@ -1,75 +1,205 @@
 body {
-  display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  justify-content: center;
-  align-items: left;
-  height: 100vh;
+  height: 100%;
   margin: 0;
-  background-color: #f7f7f7b0;
-  font-family: "Helvetica", "Arial", "Roboto";
-  font-size: 16px;
+  background-color: #f2f2f2; /* Softer neutral background */
+  font-family: "Georgia", serif; /* Use a more elegant serif font */
+  font-size: 20px; /* Increase the base font size for overall readability */
+  line-height: 1.8;
+  color: #333;
 }
 
 .container {
-  width: 60%; /* Make the container take up the full width */
-  margin: auto;
+  width: 85%; /* Slightly wider container for better use of space */
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px 0; /* Add some padding for content spacing */
 }
 
-#map {
-  height: 70vh; /* Adjusted to be responsive */
-  width: 100%;
-  margin: 0 auto; /* Center the map */
-}
-
+/* Heading Styling */
 h1 {
-  font-family: Miller;
-  margin-top: 20px;
-  font-size: 60px;
-  font-weight: bolder;
-  text-align: left;
+  font-family: "Playfair Display", serif; /* A more elegant serif font */
+  font-size: 65px; /* Larger font size for headline */
+  font-weight: bold;
+  color: #111; /* Darker color for strong emphasis */
+  margin-bottom: 10px;
 }
 
-p {
-  font-size: 20px;
+h1,
+h2,
+h4,
+.note,
+#byline {
+  text-align: center; /* Keep headers and byline centered */
 }
 
 h2 {
-  font-family: Miller;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 30px;
-  font-weight: bolder;
-  text-align: left;
+  font-family: "Helvetica", sans-serif;
+  font-size: 40px;
+  margin-top: 40px;
+  color: #444;
+}
+
+/* Map and Chart Styling */
+#map {
+  height: 600px; /* Maintain the height */
+  width: 100%;
+  margin: 40px auto;
+  border-radius: 8px; /* Retain border-radius for map */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Retain shadow for map */
+}
+
+#chart {
+  width: 100%;
+  max-width: 1000px;
+  height: 520px; /* Keep the larger chart size */
+  margin: 40px auto;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-family: "Helvetica", sans-serif;
+  /* Removed box-shadow and border-radius */
+}
+
+/* Text Styling */
+p {
+  text-align: left; /* Align text to the left for better readability */
+  font-size: 22px; /* Increase the font size for body text */
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 #byline {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 20px;
-  text-align: left;
-  color: rgb(164, 162, 162);
-  font-weight: 100;
+  font-family: "Helvetica", sans-serif;
+  font-size: 18px;
+  color: #777; /* Lighter color for the byline */
+  margin-bottom: 30px;
 }
 
+/* Notes and Methodology Section */
 .note {
-  margin-top: 5px;
+  font-size: 18px; /* Slightly smaller than the main body text */
+  color: rgb(164, 162, 162); /* Revert to the lighter previous color */
+  margin-top: 10px;
   margin-bottom: 5px;
-  font-size: 14px;
-  text-align: left;
-  color: rgb(164, 162, 162);
-  font-weight: 100;
+  font-family: "Helvetica", sans-serif;
 }
 
-/* Customize tooltip font size and ensure text wrapping works properly */
-.leaflet-tooltip {
-  font-size: 15px;
-  font-weight: 300;
-  padding: 15px;
-  background-color: white;
-  width: 400px;
-  max-width: 1000px;
-  height: auto;
-  white-space: normal;
-  word-wrap: break-word;
+.note p {
+  font-size: 16px;
+  color: #555;
+  margin: 3px;
+}
+
+.methodology {
+  font-family: "Helvetica", sans-serif; /* Different font for methodology */
+  font-size: 18px; /* Slightly smaller font size */
+  color: #555;
+  line-height: 1.8;
+  margin-top: 40px; /* Add separation from the content above */
+}
+
+/* h3 for section headings */
+h3 {
   text-align: left;
+  font-size: 50px; /* Increase size for section headings */
+  font-family: "Playfair Display", serif; /* Elegant serif font */
+  font-weight: 600;
+  color: #222;
+  margin: 40px 0 20px; /* Space above and below for visual separation */
+}
+
+/* Buttons (if you have any) */
+button {
+  font-family: "Helvetica", sans-serif;
+  background-color: #007acc;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005b99;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  #map,
+  #chart {
+    height: 400px; /* Adjust map and chart height for smaller screens */
+  }
+
+  .container {
+    width: 90%; /* Adjust container width for smaller devices */
+  }
+
+  h1 {
+    font-size: 40px; /* Adjust heading size for mobile */
+  }
+
+  h2 {
+    font-size: 28px; /* Adjust subheading size */
+  }
+
+  h3 {
+    font-size: 30px; /* Adjust section heading size */
+  }
+
+  p {
+    font-size: 18px; /* Adjust text size for mobile */
+  }
+
+  .methodology {
+    font-size: 16px; /* Adjust methodology text size on mobile */
+  }
+}
+
+.last-p {
+  margin-bottom: 50px;
+}
+
+h4 {
+  font-size: 28px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #555;
+  font-weight: 600;
+  font-family: "Helvetica", sans-serif;
+}
+
+/* Styling for Methodology section and below */
+.methodology-section {
+  background-color: #000; /* Set background to black */
+  color: #fff; /* Set text color to white */
+  padding: 20px; /* Add padding to make it look better */
+}
+
+/* Adjust heading colors specifically for the methodology section */
+.methodology-section h4 {
+  color: #fff; /* Set headings to white */
+}
+
+/* Adjust paragraph colors specifically for the methodology section */
+.methodology-section p {
+  color: #f0f0f0; /* Slightly off-white for readability */
+  font-size: 22px;
+}
+
+.image-section {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.image-section img {
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.caption {
+  font-size: 14px;
+  color: #555;
+  margin-top: 8px;
 }

@@ -1,7 +1,7 @@
 // Initialize the map
 const map = L.map("map").setView([37.76, -122.44], 12.3);
 
-// Add a tile layer (Stamen Toner Background as per your example)
+// Add a tile layer (Stamen Toner Background)
 const Stadia_StamenTonerBackground = L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
   {
@@ -168,4 +168,146 @@ locations.forEach(function (location) {
     permanent: false, // Only show when hovered
     direction: "top",
   });
+});
+
+////// Stacked Bar Chart ///////
+// Set up the dimensions and margins for the chart
+const margin = {top: 20, right: 30, bottom: 20, left: 50},
+  width = Math.min(1000, window.innerWidth * 0.8) - margin.left - margin.right,
+  height = 500 - margin.top - margin.bottom;
+
+// Append SVG to the #chart div
+const svg = d3
+  .select("#chart")
+  .append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", `translate(${margin.left},${margin.top})`);
+
+// Load the CSV data
+d3.csv("processed_victims_Types_data.csv").then(function (data) {
+  // List of subgroups (victim roles)
+  const subgroups = data.columns.slice(1).reverse(); // Reverse the order of the subgroups
+
+  // List of groups (years)
+  const groups = data.map((d) => d.accident_year);
+
+  // X axis: scale for years
+  const x = d3.scaleBand().domain(groups).range([0, width]).padding([0.2]);
+
+  svg
+    .append("g")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickSize(1))
+    .selectAll("text")
+    .style("font-size", "14px");
+
+  // Y axis: scale for count, with nice background tick lines
+  const y = d3
+    .scaleLinear()
+    .domain([0, d3.max(data, (d) => d3.sum(subgroups, (key) => +d[key]))])
+    .nice()
+    .range([height, 0]);
+
+  const maxY = d3.max(data, (d) => d3.sum(subgroups, (key) => +d[key]));
+  const yTicks = d3.range(0, maxY + 10, 10);
+
+  const yAxis = svg
+    .append("g")
+    .call(d3.axisLeft(y).tickValues(yTicks).tickSize(-width))
+    .call((g) => g.select(".domain").remove()) // Remove vertical line
+    .call((g) => g.selectAll("line").attr("stroke", "#e0e0e0"))
+    .call((g) => g.selectAll("text").attr("font-size", "14px"));
+
+  const color = d3.scaleOrdinal().domain(subgroups).range([
+    "#fed9a6", // light orange
+    "#c3410f", // deep orange-red
+    "#e08964", // light orange-red
+    "#c56a4a", // medium red-orange
+    "#a44b34", // softer red-orange
+    "#5a1a0d", // deep wine red;
+  ]);
+
+  // Stack the data
+  const stackedData = d3.stack().keys(subgroups.reverse())(data); // Make sure the stack is in correct order
+
+  // Show the bars
+  const bars = svg
+    .append("g")
+    .selectAll("g")
+    .data(stackedData)
+    .enter()
+    .append("g")
+    .attr("fill", (d) => color(d.key)) // Use the subgroups' order for colors
+    .attr("class", (d) => `subgroup-${d.key}`) // Add a class to each subgroup
+    .selectAll("rect")
+    .data((d) => d)
+    .enter()
+    .append("rect")
+    .attr("x", (d) => x(d.data.accident_year))
+    .attr("y", (d) => y(d[1]))
+    .attr("height", (d) => y(d[0]) - y(d[1]))
+    .attr("width", x.bandwidth())
+    .on("mouseover", function (event, d) {
+      const subgroup = d3.select(this.parentNode).datum().key;
+
+      // Fade out other subgroups' bars
+      d3.selectAll("g").selectAll("rect").attr("fill-opacity", 0.3);
+
+      // Highlight all rects of the same subgroup
+      d3.selectAll(`.subgroup-${subgroup}`).selectAll("rect").attr("fill-opacity", 1);
+
+      // Fade out other subgroups' legend
+      d3.selectAll(".legend").selectAll("rect").attr("fill-opacity", 0.3);
+
+      // Highlight the legend for the same subgroup
+      d3.select(`.legend-${subgroup}`).selectAll("rect").attr("fill-opacity", 1);
+
+      // Show the count for all bars of the same subgroup
+      d3.selectAll(`.subgroup-${subgroup}`)
+        .selectAll("rect")
+        .each(function (d) {
+          svg
+            .append("text")
+            .attr("class", "value-label")
+            .attr("x", x(d.data.accident_year) + x.bandwidth() / 2)
+            .attr("y", (y(d[0]) + y(d[1])) / 2)
+            .attr("text-anchor", "middle")
+            .text(d[1] - d[0])
+            .attr("fill", "white");
+        });
+    })
+    .on("mouseout", function () {
+      // Restore all bars
+      d3.selectAll("rect").attr("fill-opacity", 1);
+      // Restore all legends
+      d3.selectAll(".legend").selectAll("rect").attr("fill-opacity", 1);
+      // Remove the count labels
+      svg.selectAll(".value-label").remove();
+    });
+
+  // Add a legend
+  const legend = svg
+    .selectAll(".legend")
+    .data(subgroups.reverse()) // Reverse the legend order
+    .enter()
+    .append("g")
+    .attr("class", (d) => `legend legend-${d}`) // Add class to identify each legend
+    .attr("transform", (d, i) => `translate(40,${i * 20})`);
+
+  legend
+    .append("rect")
+    .attr("x", width - 18)
+    .attr("width", 18)
+    .attr("height", 18)
+    .style("fill", (d) => color(d)); // Use the same color mapping
+
+  legend
+    .append("text")
+    .attr("x", width - 24)
+    .attr("y", 9)
+    .attr("dy", ".35em")
+    .style("text-anchor", "end")
+    .text((d) => d);
 });
