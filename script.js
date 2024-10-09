@@ -163,10 +163,13 @@ locations.forEach(function (location) {
     radius: 7,
   }).addTo(map);
 
-  // Bind tooltip to marker
+  // Bind tooltip to marker with maxWidth and minWidth for better text wrapping
   marker.bindTooltip(location.description, {
     permanent: false, // Only show when hovered
     direction: "top",
+    className: "custom-tooltip", // Add custom class for styling
+    maxWidth: 300, // Increase the width for longer lines
+    minWidth: 250, // Prevent wrapping too early
   });
 });
 
